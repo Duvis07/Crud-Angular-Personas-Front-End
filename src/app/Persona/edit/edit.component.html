@@ -1,0 +1,30 @@
+<div class="container col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3>Editar Personas</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editPersona"
+        (ngSubmit)="actualizar(persona)">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input value={{persona.nombre} formControlName="nombre"  placeholder={{persona.nombre}} type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input formControlName="apellido"  placeholder={{persona.apellido}} type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input formControlName="edad"  placeholder={{persona.edad}} type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="nacionalidad">Nacionalidad:</label>
+            <input formControlName="nacionalidad"  placeholder={{persona.nacionalidad}} type="text" class="form-control" />
+          </div>
+          <button type="submit"  class="btn btn-primary">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

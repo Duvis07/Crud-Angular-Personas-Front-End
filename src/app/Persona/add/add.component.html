@@ -1,0 +1,48 @@
+<div class="container col-md-6">
+  <div class="card">
+    <div class="card-header">
+      <h3>Agregar Personas</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="createPersona" (ngSubmit)="agregarPersona()">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input
+            formControlName="nombre"
+            placeholder="Nombre"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido:</label>
+          <input
+            formControlName="apellido"
+            placeholder="Apellido"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="edad">Edad:</label>
+          <input
+            formControlName="edad"
+            placeholder="Edad"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="nacionalidad">Nacionalidad:</label>
+          <input
+            formControlName="nacionalidad"
+            placeholder="Nacionalidad"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+      </form>
+    </div>
+  </div>
+</div>
