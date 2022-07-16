@@ -1,8 +1,17 @@
 #bt-nuevo {
   margin-left: 10px;
   margin-bottom: 10px;
+  font-weight: bold;
+  color: white;
 }
 
 #bt-listar {
   margin-bottom: 10px;
+  margin-left: 130px;
+  font-weight: bold;
+  color: white;
+}
+
+.container{
+    margin-top: 55px;
 }

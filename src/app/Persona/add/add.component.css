@@ -1,0 +1,19 @@
+#agregar{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 250px;
+    margin-right: 10px;
+    font-weight: bold;
+    width: 100px;
+   
+}
+
+.form-control{
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.label{
+    margin-bottom: 5px;
+  
+}

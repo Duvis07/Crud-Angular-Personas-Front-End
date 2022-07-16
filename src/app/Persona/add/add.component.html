@@ -6,7 +6,7 @@
     <div class="card-body">
       <form [formGroup]="createPersona" (ngSubmit)="agregarPersona()">
         <div class="form-group">
-          <label for="nombre">Nombre:</label>
+          <label class="label" for="nombre">Nombre:</label>
           <input
             formControlName="nombre"
             placeholder="Nombre"
@@ -14,8 +14,9 @@
             class="form-control"
           />
         </div>
+    
         <div class="form-group">
-          <label for="apellido">Apellido:</label>
+          <label class="label" for="apellido">Apellido:</label>
           <input
             formControlName="apellido"
             placeholder="Apellido"
@@ -24,7 +25,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="edad">Edad:</label>
+          <label class="label" for="edad">Edad:</label>
           <input
             formControlName="edad"
             placeholder="Edad"
@@ -33,7 +34,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="nacionalidad">Nacionalidad:</label>
+          <label class="label" for="nacionalidad">Nacionalidad:</label>
           <input
             formControlName="nacionalidad"
             placeholder="Nacionalidad"
@@ -41,7 +42,7 @@
             class="form-control"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Agregar</button>
+        <button id="agregar" type="submit" class="btn btn-primary">Agregar</button>
       </form>
     </div>
   </div>
