@@ -1,4 +1,6 @@
 export class Persona {
+
+  //CLASE PERSONA CON SUS ATRIBUTOS Y CONSTRUCTOR
   id: string;
   nombre: string;
   apellido: string;

@@ -3,11 +3,12 @@
     <div class="card-header">
       <h3>Agregar Personas</h3>
     </div>
-    <div class="card-body">
+    <div  class="card-body">
       <form [formGroup]="createPersona" (ngSubmit)="agregarPersona()">
         <div class="form-group">
-          <label class="label" for="nombre">Nombre:</label>
+          <label  for="validationCustom01" class="form-label" for="nombre">Nombre:</label>
           <input
+          id="validationCustom01"
             formControlName="nombre"
             placeholder="Nombre"
             type="text"

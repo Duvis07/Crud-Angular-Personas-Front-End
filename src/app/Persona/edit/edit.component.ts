@@ -3,6 +3,7 @@ import { ServiceService } from 'src/app/Service/service.service';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/modelo/Persona';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
@@ -62,8 +63,20 @@ export class EditComponent implements OnInit {
 
     this.service.updatePersona(person).subscribe((data) => {
       this.persona = data;
-      alert('Se actualizo correctamente el usuario');
-      this.router.navigate(['/listar']);
-    });
+      Swal.fire({
+        title: 'Actualizado',
+        text: 'Se actualizo correctamente el usuario',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Aceptar',
+      }).then((result) => {
+        if (result.value) {
+          setTimeout(() => {
+            this.router.navigate(['/listar']);
+          }, 2000);
+        }
+      }
+    )});
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/modelo/Persona';
+import Swal from 'sweetalert2';
 import { ServiceService } from '../../Service/service.service';
 
 @Component({
@@ -26,7 +27,19 @@ export class ListarComponent implements OnInit {
   eliminar(persona: Persona) {
     this.service.deletePersona(persona).subscribe((data) => {
       this.personas = this.personas.filter((p) => p !== persona);
-      alert('Se elimino correctamente el usuario');
-    });
+     Swal.fire({
+        title: 'Eliminado',
+        text: 'Se elimino correctamente el usuario',
+        icon: 'success',
+        showCancelButton: false,
+        
+      
+      }).then((result) => {
+        if (result.value) {
+          this.router.navigate(['/listar']);
+        }
+      }
+    )});
+  
   }
 }
