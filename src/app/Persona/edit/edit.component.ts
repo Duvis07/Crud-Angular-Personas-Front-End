@@ -23,6 +23,8 @@ export class EditComponent implements OnInit {
       apellido: ['', Validators.required],
       edad: ['', Validators.required],
       nacionalidad: ['', Validators.required],
+      estado: ['activo'],
+      seleccionada: [false],
     });
   }
 
@@ -59,6 +61,10 @@ export class EditComponent implements OnInit {
         this.editPersona.value.nacionalidad === ''
           ? this.persona.nacionalidad
           : this.editPersona.value.nacionalidad,
+
+      estado: this.editPersona.value.estado,
+
+      seleccionada: this.editPersona.value.seleccionada,
     };
 
     this.service.updatePersona(person).subscribe((data) => {
@@ -76,7 +82,7 @@ export class EditComponent implements OnInit {
             this.router.navigate(['/listar']);
           }, 2000);
         }
-      }
-    )});
+      });
+    });
   }
 }
