@@ -18,7 +18,7 @@ export class ServiceService {
     return this.http.get<Persona[]>(direction);
   }
 
-  createPersona(persona: Persona):Observable<any> {
+  createPersona(persona: Persona): Observable<any> {
     let direction = this.Url + 'add';
     return this.http.post<any>(direction, persona, {
       responseType: 'text' as 'json',
@@ -30,7 +30,7 @@ export class ServiceService {
     return this.http.get<Persona>(direction);
   }
 
-  updatePersona(persona: Persona):Observable<any> {
+  updatePersona(persona: Persona): Observable<any> {
     let direction = this.Url + 'edit' + '/' + persona.id;
     return this.http.put<Persona>(direction, persona);
   }
@@ -38,5 +38,11 @@ export class ServiceService {
   deletePersona(persona: Persona) {
     let direction = this.Url + 'delete' + '/' + persona.id;
     return this.http.delete<Persona>(direction);
+  }
+
+  retirarPersona(id: number): Observable<any> {
+    const url = `${this.Url}${id}/retirar`;
+    return this.http.post(url, {});
+
   }
 }

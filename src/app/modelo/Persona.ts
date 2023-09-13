@@ -1,17 +1,18 @@
 export class Persona {
+  [x: string]: unknown;
 
   //CLASE PERSONA CON SUS ATRIBUTOS Y CONSTRUCTOR
-  id: string;
+  id: number;
   nombre: string;
   apellido: string;
   edad: string;
   nacionalidad: string;
   estado: string = 'activo';
-  seleccionada!: false; // Añade esta propiedad de selección
+  seleccionada!: boolean;
 
 
   
-    constructor(id: string, nombre: string, apellido: string, edad: string, nacionalidad: string, estado: string, seleccionada: false) {
+    constructor(id: number, nombre: string, apellido: string, edad: string, nacionalidad: string, estado: string, seleccionada: false) {
       this.id = id;
       this.nombre = nombre;
       this.apellido = apellido;

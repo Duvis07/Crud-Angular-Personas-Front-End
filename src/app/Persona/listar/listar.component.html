@@ -1,14 +1,16 @@
 <div class="container col-md-8">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
       <h3>Personas</h3>
+      <div>
+        <button class="btn btn-danger" (click)="retirarMasivamente()">Retirar</button>
+        <button  class="btn btn-warning mx-2"  (click)="seleccionarTodos()">Seleccionar Todos</button>
+      </div>
     </div>
     <div class="card-body">
-      <button class="btn btn-danger" (click)="eliminarSeleccionadas()">Eliminar seleccionadas</button>
       <table class="table table-striped">
         <thead>
           <tr>
-          <!--   <th>ID</th> -->
             <th>NOMBRE</th>
             <th>APELLIDO</th>
             <th>EDAD</th>
@@ -20,18 +22,18 @@
         </thead>
         <tbody>
           <tr *ngFor="let persona of personas" class="text-center">
-           <!--  <td>{{ persona.id }}</td> -->
+          
             <td>{{ persona.nombre }}</td>
             <td>{{ persona.apellido }}</td>
             <td>{{ persona.edad }}</td>
             <td>{{ persona.nacionalidad }}</td>
             <td>{{ persona.estado }}</td>
-       
-              <td><input type="checkbox" [(ngModel)]="persona.seleccionada" [disabled]="persona.estado === 'retirado'"></td>
-        
+
+             <td><input type="checkbox" [(ngModel)]="persona.seleccionada" (ngModelChange)="updateSelected(persona)"[disabled]="persona.estado === 'Retirado'"></td>
             <td>
               <button id="editar" (click)="editar(persona)" class="btn btn-warning">Editar</button>
               <button id="eliminar" (click)="eliminar(persona)" class="btn btn-danger">Eliminar</button>
+
             </td>
           </tr>
         </tbody>

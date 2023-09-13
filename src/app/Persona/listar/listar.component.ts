@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/modelo/Persona';
 import Swal from 'sweetalert2';
 import { ServiceService } from '../../Service/service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listar',
@@ -11,9 +12,15 @@ import { ServiceService } from '../../Service/service.service';
 })
 export class ListarComponent implements OnInit {
   personas: Persona[] = [];
+  selectedPeople: Persona[] = [];
+
   constructor(private service: ServiceService, private router: Router) {}
 
   ngOnInit(): void {
+    this.listar();
+  }
+
+  listar() {
     this.service.getPersonas().subscribe((data) => {
       this.personas = data;
     });
@@ -24,47 +31,6 @@ export class ListarComponent implements OnInit {
     this.router.navigate(['/edit/' + persona.id]);
   }
 
-  eliminarSeleccionadas() {
-    // Lógica para eliminar personas seleccionadas
-    const personasSeleccionadas = this.personas.filter((p) => p.seleccionada);
-
-    if (personasSeleccionadas.length === 0) {
-      Swal.fire({
-        title: 'Error',
-        text: 'No hay personas seleccionadas',
-        icon: 'error',
-        showCancelButton: false,
-      });
-      return;
-    }
-    
-    Swal.fire({
-      title: '¿Está seguro?',
-      text: 'Está seguro que desea eliminar las personas seleccionadas',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'No, cancelar',
-    }).then((result) => {
-      if (result.value) {
-        personasSeleccionadas.forEach((p) => {
-          p.estado = 'retirado';
-          this.service.updatePersona(p).subscribe();
-        });
-        Swal.fire({
-          title: 'Eliminado',
-          text: 'Se eliminaron correctamente las personas seleccionadas',
-          icon: 'success',
-          showCancelButton: false,
-        }).then((result) => {
-          if (result.value) {
-            this.router.navigate(['/listar']);
-          }
-        });
-      }
-    });
-    this.personas = this.personas.filter((p) => !p.seleccionada);
-  }
 
   eliminar(persona: Persona) {
     this.service.deletePersona(persona).subscribe((data) => {
@@ -79,6 +45,65 @@ export class ListarComponent implements OnInit {
           this.router.navigate(['/listar']);
         }
       });
+    });
+  }
+
+  updateSelected(person: Persona) {
+    if (person.seleccionada) {
+      this.selectedPeople.push(person);
+    } else {
+      const index = this.selectedPeople.indexOf(person);
+      if (index > -1) {
+        this.selectedPeople.splice(index, 1);
+      }
+    }
+  }
+
+  retirarMasivamente(): void {
+    const personasSeleccionadas = this.personas.filter(
+      (persona) => persona.seleccionada
+    );
+
+    if (personasSeleccionadas.length === 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'No hay personas seleccionadas',
+        icon: 'error',
+        showCancelButton: false,
+      });
+      return; // No hay personas seleccionadas, no se realiza ninguna acción.
+    }
+
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: 'Está seguro que desea retirar las personas seleccionadas',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, retirar',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.value) {
+        personasSeleccionadas.forEach((p) => {
+          p.estado = 'Retirado';
+          this.service.retirarPersona(p.id).subscribe();
+        });
+        Swal.fire({
+          title: 'Retirado',
+          text: 'Se retiraron correctamente las personas seleccionadas',
+          icon: 'success',
+          showCancelButton: false,
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(['/listar']);
+          }
+        });
+      }
+    });
+  }
+
+  seleccionarTodos() {
+    this.personas.forEach((persona) => {
+      persona.seleccionada = true;
     });
   }
 }
